@@ -1,0 +1,3 @@
+D:/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/DataShare.dir
+D:/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,54 @@
+#include <iostream>
+#include <wiringSerial.h>
+#include <wiringPi.h>
+#include <cstring>
+#include <errno.h>
+
+int main() {
+    // Инициализация wiringPi
+    if (wiringPiSetup() == -1) {
+        std::cerr << "Ошибка инициализации wiringPi" << std::endl;
+        return 1;
+    }
+
+    // Открываем последовательный порт
+    // Обычно после настройки UART появляется устройство /dev/serial0
+    int fd = serialOpen("/dev/serial0", 9600); // 9600 - скорость (baud rate)
+    
+    if (fd == -1) {
+        std::cerr << "Не удалось открыть порт: " << strerror(errno) << std::endl;
+        return 1;
+    }
+
+    std::cout << "Ожидание данных на /dev/serial0..." << std::endl;
+
+    // Бесконечный цикл чтения данных
+    while (true) {
+        // Проверяем, есть ли данные в буфере
+        if (serialDataAvail(fd) > 0) {
+            // Читаем один символ
+            char received = serialGetchar(fd);
+            
+            // Выводим на экран (можно накапливать в буфер для формирования строки)
+            std::cout << received << std::flush;
+            
+            // Если нужно читать строки до символа '\n', можно реализовать так:
+            /*
+            static std::string line;
+            if (received == '\n') {
+                std::cout << "Получена строка: " << line << std::endl;
+                line.clear();
+            } else if (received != '\r') {
+                line += received;
+            }
+            */
+        }
+        
+        // Небольшая задержка, чтобы не нагружать процессор
+        delay(10);
+    }
+
+    // Закрываем порт (сюда мы никогда не дойдем в этом примере)
+    serialClose(fd);
+    return 0;
+}
