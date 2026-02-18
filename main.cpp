@@ -46,12 +46,12 @@ int main() {
     for (int *d = a, *end = d + N; d < end; ++d)
     {
          *d = rand()%100;
-    }
+    } 
 
     for(int i=0;i<N;i++) {
 
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
-        _sleep(300);
+        _sleep(30);
         sendDataToComPortChar(hSerial, "\r\n", bytesWritten);
         
     }
