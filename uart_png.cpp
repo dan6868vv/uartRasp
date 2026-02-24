@@ -8,6 +8,8 @@
 #include <wiringSerial.h>
 #include <wiringPi.h>
 #include <SFML/Graphics.hpp>
+#include <fstream>  // Для чтения конфигурационного файла
+#include <map>      // Для хранения пар ключ-значение из конфига
 
 // Класс для накопления строки из UART
 class UARTLineReader {
@@ -72,7 +74,13 @@ private:
     bool portOpen;
     std::string portName;
     bool texturesLoaded;
-    
+
+    // NEW: для конфигурации точки вращения
+    float pivotX;
+    float pivotY;
+    std::string configFile;
+    bool useConfig;
+
     // Для отладки - показываем, загрузились ли текстуры
     std::string lastError;
     
@@ -86,7 +94,12 @@ public:
         texturesLoaded(false) {
         
         window.setFramerateLimit(60);
-        
+        // NEW: инициализация переменных конфигурации
+    	pivotX = 0;
+   	 	pivotY = 0;
+   	 	configFile = "needle_config.txt";
+    	useConfig = false;
+
         // Загружаем фоновое изображение
         if (!backgroundTexture.loadFromFile("background.png")) {
             lastError = "Не удалось загрузить background.png";
@@ -102,18 +115,17 @@ public:
         }
         
         // Загружаем изображение стрелки
-        if (!needleTexture.loadFromFile("needle.png")) {
-            lastError = "Не удалось загрузить needle.png";
-            std::cerr << lastError << std::endl;
-        } else {
-            needleSprite.setTexture(needleTexture);
-            
-            // Устанавливаем центр вращения в центр изображения
-            sf::Vector2u texSize = needleTexture.getSize();
-            needleSprite.setOrigin(texSize.x / 2.0f, texSize.y / 2.0f);
-            
-            texturesLoaded = true;
-        }
+	if (!needleTexture.loadFromFile("needle.png")) {
+    	lastError = "Не удалось загрузить needle.png";
+    	std::cerr << lastError << std::endl;
+	} else {
+    	needleSprite.setTexture(needleTexture);
+
+   	 	// NEW: загружаем конфигурацию и устанавливаем точку вращения
+   	 	loadConfig(configFile);
+
+    	texturesLoaded = true;
+	}
         
         // Размещаем стрелку по центру окна
         needleSprite.setPosition(400, 300);
@@ -149,7 +161,66 @@ public:
     void setPortStatus(bool open) {
         portOpen = open;
     }
-    
+
+		void setPortStatus(bool open) {
+    portOpen = open;
+}
+
+// NEW: метод для загрузки конфигурации
+void loadConfig(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Конфиг файл не найден. Использую центр по умолчанию." << std::endl;
+        sf::Vector2u texSize = needleTexture.getSize();
+        pivotX = texSize.x / 2.0f;
+        pivotY = texSize.y / 2.0f;
+        needleSprite.setOrigin(pivotX, pivotY);
+        return;
+    }
+
+    std::map<std::string, float> config;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        // Пропускаем комментарии и пустые строки
+        if (line.empty() || line[0] == '#') continue;
+
+        std::istringstream iss(line);
+        std::string key;
+        std::string equals;
+        float value;
+
+        if (iss >> key >> equals >> value && equals == "=") {
+            config[key] = value;
+            std::cout << "Конфиг: " << key << " = " << value << std::endl;
+        }
+    }
+
+    file.close();
+
+    // Получаем размер текстуры для процентных значений
+    sf::Vector2u texSize = needleTexture.getSize();
+
+    // Устанавливаем значения из конфига
+    if (config.count("pivot_x_percent")) {
+        pivotX = (config["pivot_x_percent"] / 100.0f) * texSize.x;
+    } else if (config.count("pivot_x")) {
+        pivotX = config["pivot_x"];
+    } else {
+        pivotX = texSize.x / 2.0f;  // центр по умолчанию
+    }
+
+    if (config.count("pivot_y_percent")) {
+        pivotY = (config["pivot_y_percent"] / 100.0f) * texSize.y;
+    } else if (config.count("pivot_y")) {
+        pivotY = config["pivot_y"];
+    } else {
+        pivotY = texSize.y / 2.0f;  // центр по умолчанию
+    }
+
+    std::cout << "Установлен центр вращения: (" << pivotX << ", " << pivotY << ")" << std::endl;
+    needleSprite.setOrigin(pivotX, pivotY);
+}
     void setTargetAngle(float angle) {
         targetAngle = angle;
     }
