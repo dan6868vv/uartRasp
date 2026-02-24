@@ -162,9 +162,7 @@ public:
         portOpen = open;
     }
 
-		void setPortStatus(bool open) {
-    portOpen = open;
-}
+		
 
 // NEW: метод для загрузки конфигурации
 void loadConfig(const std::string& filename) {
