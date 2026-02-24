@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug",
-		"source" : "D:/AeroMash/DigitalArrowDisplay/DataShare"
+		"build" : "D:/_root/\u0420\u0430\u0431\u043e\u0442\u0430/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug",
+		"source" : "D:/_root/\u0420\u0430\u0431\u043e\u0442\u0430/AeroMash/DigitalArrowDisplay/DataShare"
 	},
 	"version" : 
 	{

@@ -41,17 +41,17 @@ int main() {
     const char* data = "12,12,45,6\r\n";  // \r\n для перевода строки на приемнике
     DWORD bytesWritten;
 
-    const int N = 100;
+    const int N = 400;
     int a[N];
     for (int *d = a, *end = d + N; d < end; ++d)
     {
-         *d = rand()%100;
+         *d = rand()%360;
     } 
 
     for(int i=0;i<N;i++) {
 
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
-        _sleep(30);
+        _sleep(500);
         sendDataToComPortChar(hSerial, "\r\n", bytesWritten);
         
     }
