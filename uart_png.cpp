@@ -21,7 +21,7 @@ std::vector<std::string> loadConfigPngFiles(const std::string& filename) {
         return nameFiles;
     }
 
-    std::map<std::string, float> config;
+
     std::string line;
 
     while (std::getline(file, line)) {
