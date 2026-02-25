@@ -169,7 +169,6 @@ public:
 
             // NEW: загружаем конфигурацию и устанавливаем точку вращения
             loadConfig(configFile);
-
             texturesLoaded = true;
         }
 
@@ -182,20 +181,10 @@ public:
             angleText.setStyle(sf::Text::Bold);
             angleText.setOutlineColor(sf::Color::Black);
             angleText.setOutlineThickness(2);
-
-            statusText.setFont(font);
-            statusText.setCharacterSize(18);
-            statusText.setFillColor(sf::Color(150, 255, 150));
-
-            debugText.setFont(font);
-            debugText.setCharacterSize(16);
-            debugText.setFillColor(sf::Color::Yellow);
         }
 
         // Позиционируем текст
         angleText.setPosition(300, 500);
-        statusText.setPosition(10, 10);
-        debugText.setPosition(10, 560);
     }
 
     bool isOpen() const {
@@ -299,8 +288,6 @@ public:
 
         // NEW: обновляем позиции текста
         angleText.setPosition(windowX / 2.0f - 100, windowY - 100);
-        statusText.setPosition(10, 10);
-        debugText.setPosition(10, windowY - 40);
     }
 
     void setTargetAngle(float angle) {
@@ -327,22 +314,8 @@ public:
 
         // Обновляем текстовую информацию
         char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Угол: %.1f°", currentAngle);
+        snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
         angleText.setString(buffer);
-
-        if (!portOpen) {
-            statusText.setString("❌ Порт закрыт!");
-            statusText.setFillColor(sf::Color(255, 100, 100));
-        } else {
-            statusText.setString("✅ Чтение: " + portName);
-            statusText.setFillColor(sf::Color(150, 255, 150));
-        }
-
-        if (!texturesLoaded) {
-            debugText.setString("⚠️ " + lastError);
-        } else {
-            debugText.setString("✓ Текстуры загружены");
-        }
     }
 
     void draw() {
@@ -399,8 +372,6 @@ public:
 
         // Рисуем текст
         window.draw(angleText);
-        window.draw(statusText);
-        window.draw(debugText);
 
         window.display();
     }
