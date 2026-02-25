@@ -289,7 +289,7 @@ public:
         needleSprite.setPosition(centerX, centerY);
 
         // NEW: обновляем позиции текста
-        angleText.setPosition(windowX - 300, windowY - 10);
+        angleText.setPosition(windowX - 300, windowY - 80);
     }
 
     void setTargetAngle(float angle) {
