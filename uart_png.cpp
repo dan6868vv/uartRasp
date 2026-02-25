@@ -31,7 +31,7 @@ std::vector<std::string> loadConfigPngFiles(const std::string& filename) {
         std::istringstream iss(line);
         std::string key;
         std::string equals;
-        float value;
+        std::string value;
 
         if (iss >> key >> equals >> value && equals == "=") {
             config[key] = value;
@@ -474,7 +474,7 @@ int main(int argc, char** argv) {
     // Создаем графическое окно
     std::vector nameFiles = loadConfigPngFiles("pic_config.txt");
     std::cout << nameFiles.at(0) << std::endl;
-    std::cout << nameFiles.at(0) << std::endl;
+    std::cout << nameFiles.at(1) << std::endl;
 
     PNGauge gauge(port,nameFiles.at(0),nameFiles.at(1));
     gauge.setPortStatus(fd != -1);
