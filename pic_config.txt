@@ -1,0 +1,2 @@
+needle_file_name = needle2.png
+background_file_name = background.png

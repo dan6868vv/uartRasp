@@ -41,7 +41,7 @@ int main() {
     const char* data = "12,12,45,6\r\n";  // \r\n для перевода строки на приемнике
     DWORD bytesWritten;
 
-    const int N = 400;
+    const int N = 4000;
     int a[N];
     for (int *d = a, *end = d + N; d < end; ++d)
     {

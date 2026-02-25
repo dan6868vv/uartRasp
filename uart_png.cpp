@@ -10,7 +10,52 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>  // Для чтения конфигурационного файла
 #include <map>      // Для хранения пар ключ-значение из конфига
+std::vector<std::string> loadConfigPngFiles(const std::string& filename) {
 
+    std::ifstream file(filename);
+    std::vector<std::string> nameFiles;
+    if (!file.is_open()) {
+        std::cout << "Конфиг файл не найден." << std::endl;
+        nameFiles.push_back("needle.png");
+        nameFiles.push_back("background.png");
+        return nameFiles;
+    }
+
+    std::map<std::string, float> config;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        // Пропускаем комментарии и пустые строки
+        if (line.empty() || line[0] == '#') continue;
+
+        std::istringstream iss(line);
+        std::string key;
+        std::string equals;
+        float value;
+
+        if (iss >> key >> equals >> value && equals == "=") {
+            config[key] = value;
+            std::cout << "Конфиг name Files: " << key << " = " << value << std::endl;
+        }
+    }
+
+    file.close();
+
+    // Устанавливаем значения из конфига
+    if (config.count("needle_file_name")) {
+        nameFiles.push_back(config["needle_file_name"]);
+    }
+    else {
+        nameFiles.push_back("needle.png");
+        }
+    if (config.count("background_file_name")) {
+        nameFiles.push_back(config["background_file_name"]);
+    }
+    else {
+        nameFiles.push_back("background.png");
+        }
+    return nameFiles;
+}
 // Класс для накопления строки из UART
 class UARTLineReader {
 private:
@@ -89,7 +134,7 @@ private:
     std::string lastError;
     
 public:
-    PNGauge(const std::string& port) :
+    PNGauge(const std::string& port, std::string needleFileName, std::string backgroundFileName) :
         window(sf::VideoMode(800, 600), "UART Gauge - Стрелочный индикатор"),
         currentAngle(0.0f),
         targetAngle(0.0f),
@@ -109,8 +154,8 @@ public:
     	useConfig = false;
 
         // Загружаем фоновое изображение
-        if (!backgroundTexture.loadFromFile("background.png")) {
-            lastError = "Не удалось загрузить background.png";
+        if (!backgroundTexture.loadFromFile(backgroundFileName)) {
+            lastError = "Не удалось загрузить " + backgroundFileName ;
             std::cerr << lastError << std::endl;
         } else {
             backgroundSprite.setTexture(backgroundTexture);
@@ -123,8 +168,8 @@ public:
         }
         
         // Загружаем изображение стрелки
-	if (!needleTexture.loadFromFile("needle.png")) {
-    	lastError = "Не удалось загрузить needle.png";
+	if (!needleTexture.loadFromFile(needleFileName)) {
+    	lastError = "Не удалось загрузить " + needleFileName;
     	std::cerr << lastError << std::endl;
 	} else {
     	needleSprite.setTexture(needleTexture);
@@ -135,9 +180,7 @@ public:
     	texturesLoaded = true;
 	}
         
-        // Размещаем стрелку по центру окна
-        needleSprite.setPosition(400, 300);
-        
+
         // Загружаем шрифт
         if (font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
             angleText.setFont(font);
@@ -429,7 +472,8 @@ int main(int argc, char** argv) {
     }
     
     // Создаем графическое окно
-    PNGauge gauge(port);
+    std::vector nameFiles = loadConfigPngFiles("pic_config.txt");
+    PNGauge gauge(port,nameFiles.at(0),nameFiles.at(1));
     gauge.setPortStatus(fd != -1);
     
     // Создаем читатель UART (только если порт открыт)
