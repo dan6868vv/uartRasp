@@ -316,7 +316,7 @@ public:
 
         // Обновляем текстовую информацию
         char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Angle: ", currentAngle);
+        snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
         angleText.setString(buffer);
     }
 
