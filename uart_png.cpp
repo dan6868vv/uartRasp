@@ -18,8 +18,8 @@ std::vector<std::string> loadConfigPngFiles(const std::string &filename) {
     if (!file.is_open()) {
         std::cout << "Конфиг файл установки изображений не найден. Бдут использованы needle.png и background.png" <<
                 std::endl;
-        nameFiles.push_back("needle.png");
-        nameFiles.push_back("background.png");
+        nameFiles.emplace_back("./media/needle.png");
+        nameFiles.emplace_back("./media/background.png");
         return nameFiles;
     }
 
@@ -40,12 +40,12 @@ std::vector<std::string> loadConfigPngFiles(const std::string &filename) {
     if (config.count("needle_file_name")) {
         nameFiles.push_back(config["needle_file_name"]);
     } else {
-        nameFiles.push_back("needle.png");
+        nameFiles.emplace_back("./media/needle.png");
     }
     if (config.count("background_file_name")) {
         nameFiles.push_back(config["background_file_name"]);
     } else {
-        nameFiles.push_back("background.png");
+        nameFiles.emplace_back("./media/background.png");
     }
     return nameFiles;
 }
@@ -146,7 +146,7 @@ public:
         centerX = 400;
         centerY = 300;
         needle_scale = 1;
-        configFile = "needle_config.txt";
+        configFile = "./config/needle_config.txt";
         useConfig = false;
 
         // Загружаем фоновое изображение
@@ -177,7 +177,7 @@ public:
 
 
         // Загружаем шрифт
-        if (font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
+        if (font.loadFromFile("./fonts/Roboto/Roboto_Condensed-Black.ttf")) {
             angleText.setFont(font);
             angleText.setCharacterSize(36);
             angleText.setFillColor(sf::Color::White);
