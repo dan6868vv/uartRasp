@@ -162,7 +162,7 @@ public:
         portOpen = open;
     }
 
-		
+
 
 // NEW: метод для загрузки конфигурации
 void loadConfig(const std::string& filename) {
