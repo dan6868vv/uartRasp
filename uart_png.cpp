@@ -422,7 +422,8 @@ int main(int argc, char **argv) {
     }
 
     std::cout << "======================================" << std::endl;
-    std::cout << "UART Gauge с PNG поддержкой" << std::endl;
+    std::cout << "UART Gauge с PNG поддержкой" << std::endl
+    std::cout << "\033[34mUART Gauge с PNG поддержкой\033[0m" << std::endl;
     std::cout << "======================================" << std::endl;
     std::cout << "Порт: " << port << std::endl;
     std::cout << "Скорость: " << baudRate << std::endl;
@@ -477,16 +478,7 @@ int main(int argc, char **argv) {
                 gauge.setTargetAngle(angle);
             }
         } else {
-            // Демо-режим: плавно вращаем стрелку
-            demoAngle += 0.2f;
-            if (demoAngle >= 360) demoAngle -= 360;
-            gauge.setTargetAngle(demoAngle);
-
-            // Каждые 600 кадров (примерно 10 секунд) напоминаем о демо-режиме
-            frameCount++;
-            if (frameCount % 600 == 0) {
-                std::cout << "Демо-режим: стрелка вращается. Подключите UART для реальных данных." << std::endl;
-            }
+            std::cout << "\033[31mUART не определен\033[0m" << std::endl;
         }
 
         // Обновляем состояние стрелки
