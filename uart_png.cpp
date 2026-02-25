@@ -236,6 +236,15 @@ void loadConfig(const std::string& filename) {
         window.create(sf::VideoMode(windowX, windowY), "UART Gauge - Стрелочный индикатор");
         window.setFramerateLimit(60);
 
+        // NEW: обновляем масштаб фона под новый размер окна
+        if (backgroundTexture.getSize().x > 0) {
+            sf::Vector2u texSize = backgroundTexture.getSize();
+            float scaleX = static_cast<float>(windowX) / texSize.x;
+            float scaleY = static_cast<float>(windowY) / texSize.y;
+            backgroundSprite.setScale(scaleX, scaleY);
+            std::cout << "Масштаб фона: " << scaleX << "x" << scaleY << std::endl;
+        }
+        backgroundSprite.setPosition(0, 0);
         needleSprite.setOrigin(pivotX, pivotY);
         // NEW: обновляем позицию стрелки для нового размера окна
         needleSprite.setPosition(windowX / 2.0f, windowY / 2.0f);
