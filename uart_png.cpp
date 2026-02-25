@@ -118,7 +118,7 @@ private:
     int windowY;
     int centerX;
     int centerY;
-
+    float needle_scale;
     bool isAngleText = false;
     // NEW: для конфигурации точки вращения
     float pivotX;
@@ -145,6 +145,7 @@ public:
         windowY = 600;
         centerX = 400;
         centerY = 300;
+        needle_scale = 1;
         configFile = "needle_config.txt";
         useConfig = false;
 
@@ -268,7 +269,16 @@ public:
         if (config.count("is_angle_text")) {
             isAngleText = static_cast<int>(config["is_angle_text"]);
         }
+
+        if (config.count("needle_scale")) {
+            if (config["needle_scale"] != 0) {
+                needle_scale = config["needle_scale"];
+            } else if (config["needle_scale"] == 0) {
+                needle_scale = 1;
+            }
+        }
         std::cout << "Установлен центр вращения: (" << pivotX << ", " << pivotY << ")" << std::endl;
+        needleSprite.setScale(needle_scale, needle_scale);
         needleSprite.setOrigin(pivotX, pivotY);
 
         // NEW: обновляем размер окна
