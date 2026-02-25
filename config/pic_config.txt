@@ -1,2 +1,2 @@
-needle_file_name = needle2.png
-background_file_name = background.png
+needle_file_name = needle.png
+background_file_name = background2.png

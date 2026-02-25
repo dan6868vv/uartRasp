@@ -449,7 +449,7 @@ int main(int argc, char **argv) {
     }
 
     // Создаем графическое окно
-    std::vector nameFiles = loadConfigPngFiles("pic_config.txt");
+    std::vector nameFiles = loadConfigPngFiles("./media/pic_config.txt");
     std::cout << nameFiles.at(0) << std::endl;
     std::cout << nameFiles.at(1) << std::endl;
 
