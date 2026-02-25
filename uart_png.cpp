@@ -11,7 +11,7 @@
 #include <fstream>  // Для чтения конфигурационного файла
 #include <map>      // Для хранения пар ключ-значение из конфига
 std::vector<std::string> loadConfigPngFiles(const std::string& filename) {
-
+    std::map<std::string, std::string> config;
     std::ifstream file(filename);
     std::vector<std::string> nameFiles;
     if (!file.is_open()) {
