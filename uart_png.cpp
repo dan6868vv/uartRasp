@@ -118,6 +118,8 @@ private:
     int windowY;
     int centerX;
     int centerY;
+
+    bool isAngleText = false;
     // NEW: для конфигурации точки вращения
     float pivotX;
     float pivotY;
@@ -263,6 +265,9 @@ public:
             centerY = 300;
         }
 
+        if (config.count("is_angle_text")) {
+            isAngleText = static_cast<int>(config["is_angle_text"]);
+        }
         std::cout << "Установлен центр вращения: (" << pivotX << ", " << pivotY << ")" << std::endl;
         needleSprite.setOrigin(pivotX, pivotY);
 
@@ -284,7 +289,7 @@ public:
         needleSprite.setPosition(centerX, centerY);
 
         // NEW: обновляем позиции текста
-        angleText.setPosition(windowX - 300, windowY - 100);
+        angleText.setPosition(windowX - 300, windowY - 10);
     }
 
     void setTargetAngle(float angle) {
@@ -311,7 +316,7 @@ public:
 
         // Обновляем текстовую информацию
         char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
+        snprintf(buffer, sizeof(buffer), "Angle: ", currentAngle);
         angleText.setString(buffer);
     }
 
@@ -368,7 +373,9 @@ public:
         }
 
         // Рисуем текст
-        window.draw(angleText);
+        if (isAngleText == 1) {
+            window.draw(angleText);
+        }
 
         window.display();
     }
