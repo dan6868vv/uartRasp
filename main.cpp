@@ -40,22 +40,22 @@ int main() {
 
     const int N = 4000;
     int a[N];
-    // for (int *d = a, *end = d + N; d < end; ++d) {
-    //     *d = rand() % 360;
-    // }
-    a[0] = 0;
-    for (int i = 1; i < N; i++) {
-        int num = rand();
-        if (num % 2 == 1) {
-            a[i] += num % 10;
-        } else {
-            a[i] -= num % 10;
-        }
+    for (int *d = a, *end = d + N; d < end; ++d) {
+        *d = rand() % 360;
     }
+    // a[0] = 0;
+    // for (int i = 1; i < N; i++) {
+    //     int num = rand();
+    //     if (num % 2 == 1) {
+    //         a[i] += num % 10;
+    //     } else {
+    //         a[i] -= num % 10;
+    //     }
+    // }
 
     for (int i = 0; i < N; i++) {
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
-        _sleep(100);
+        _sleep(1000);
         sendDataToComPortChar(hSerial, "\r\n", bytesWritten);
     }
 

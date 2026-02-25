@@ -325,9 +325,10 @@ public:
         needleSprite.setRotation(currentAngle);
 
         // Обновляем текстовую информацию
-        char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
-        angleText.setString(buffer);
+        // char buffer[64];
+        // snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
+        // angleText.setString(buffer);
+        angleText.setString("Угол: " + std::to_string(currentAngle));
     }
 
     void draw() {
