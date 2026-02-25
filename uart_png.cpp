@@ -473,6 +473,9 @@ int main(int argc, char** argv) {
     
     // Создаем графическое окно
     std::vector nameFiles = loadConfigPngFiles("pic_config.txt");
+    std::cout << nameFiles.at(0) << std::endl;
+    std::cout << nameFiles.at(0) << std::endl;
+
     PNGauge gauge(port,nameFiles.at(0),nameFiles.at(1));
     gauge.setPortStatus(fd != -1);
     
