@@ -75,6 +75,10 @@ private:
     std::string portName;
     bool texturesLoaded;
 
+    int windowX;
+    int windowY;
+    int centerX;
+    int centerY;
     // NEW: для конфигурации точки вращения
     float pivotX;
     float pivotY;
@@ -85,7 +89,7 @@ private:
     std::string lastError;
     
 public:
-    PNGauge(const std::string& port) : 
+    PNGauge(const std::string& port) :
         window(sf::VideoMode(800, 600), "UART Gauge - Стрелочный индикатор"),
         currentAngle(0.0f),
         targetAngle(0.0f),
@@ -97,6 +101,8 @@ public:
         // NEW: инициализация переменных конфигурации
     	pivotX = 0;
    	 	pivotY = 0;
+   	 	windowX = 800;
+   	 	windowY = 600;
    	 	configFile = "needle_config.txt";
     	useConfig = false;
 
@@ -216,8 +222,28 @@ void loadConfig(const std::string& filename) {
         pivotY = texSize.y / 2.0f;  // центр по умолчанию
     }
 
+        if (config.count("window_x")) {
+            windowX = static_cast<int>(config["window_x"]);
+        }
+        if (config.count("window_y")) {
+            windowY = static_cast<int>(config["window_y"]);
+        }
+
     std::cout << "Установлен центр вращения: (" << pivotX << ", " << pivotY << ")" << std::endl;
     needleSprite.setOrigin(pivotX, pivotY);
+
+        // NEW: обновляем размер окна
+        window.create(sf::VideoMode(windowX, windowY), "UART Gauge - Стрелочный индикатор");
+        window.setFramerateLimit(60);
+
+        needleSprite.setOrigin(pivotX, pivotY);
+        // NEW: обновляем позицию стрелки для нового размера окна
+        needleSprite.setPosition(windowX / 2.0f, windowY / 2.0f);
+
+        // NEW: обновляем позиции текста
+        angleText.setPosition(windowX / 2.0f - 100, windowY - 100);
+        statusText.setPosition(10, 10);
+        debugText.setPosition(10, windowY - 40);
 }
     void setTargetAngle(float angle) {
         targetAngle = angle;

@@ -1,2 +1,5 @@
 pivot_x = 0
 pivot_y = 25
+
+window_x = 900
+window_y = 900
