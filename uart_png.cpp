@@ -422,7 +422,7 @@ int main(int argc, char **argv) {
     }
 
     std::cout << "======================================" << std::endl;
-    std::cout << "UART Gauge с PNG поддержкой" << std::endl
+    std::cout << "UART Gauge с PNG поддержкой" << std::endl;
     std::cout << "\033[34mUART Gauge с PNG поддержкой\033[0m" << std::endl;
     std::cout << "======================================" << std::endl;
     std::cout << "Порт: " << port << std::endl;
@@ -464,8 +464,6 @@ int main(int argc, char **argv) {
 
     // Переменная для хранения угла
     float angle = 0.0f;
-    float demoAngle = 0.0f;
-    unsigned int frameCount = 0;
 
     // Главный цикл приложения
     while (gauge.isOpen()) {
