@@ -177,7 +177,7 @@ public:
 
 
         // Загружаем шрифт
-        if (font.loadFromFile("./fonts/Roboto/Roboto_Condensed-Black.ttf")) {
+        if (font.loadFromFile("./fonts/Roboto/static/Roboto_Condensed-Black.ttf")) {
             angleText.setFont(font);
             angleText.setCharacterSize(36);
             angleText.setFillColor(sf::Color::White);
@@ -449,7 +449,7 @@ int main(int argc, char **argv) {
     }
 
     // Создаем графическое окно
-    std::vector nameFiles = loadConfigPngFiles("./media/pic_config.txt");
+    std::vector nameFiles = loadConfigPngFiles("./config/pic_config.txt");
     std::cout << nameFiles.at(0) << std::endl;
     std::cout << nameFiles.at(1) << std::endl;
 
