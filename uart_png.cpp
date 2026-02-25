@@ -182,9 +182,6 @@ public:
             angleText.setOutlineColor(sf::Color::Black);
             angleText.setOutlineThickness(2);
         }
-
-        // Позиционируем текст
-        angleText.setPosition(300, 500);
     }
 
     bool isOpen() const {
@@ -287,7 +284,7 @@ public:
         needleSprite.setPosition(centerX, centerY);
 
         // NEW: обновляем позиции текста
-        angleText.setPosition(windowX / 2.0f - 100, windowY - 100);
+        angleText.setPosition(windowX - 100, windowY - 100);
     }
 
     void setTargetAngle(float angle) {
