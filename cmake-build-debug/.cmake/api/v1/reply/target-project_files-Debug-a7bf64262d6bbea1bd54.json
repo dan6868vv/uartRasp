@@ -38,21 +38,6 @@
 			[
 				0
 			]
-		},
-		{
-			"name" : "Resources",
-			"sourceIndexes" : 
-			[
-				1,
-				2
-			]
-		},
-		{
-			"name" : "",
-			"sourceIndexes" : 
-			[
-				3
-			]
 		}
 	],
 	"sources" : 
@@ -61,21 +46,6 @@
 			"backtrace" : 1,
 			"path" : "uart_png.cpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "background.png",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "needle.png",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "needle_config.txt",
-			"sourceGroupIndex" : 2
 		}
 	],
 	"type" : "UTILITY"

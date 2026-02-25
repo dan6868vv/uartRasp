@@ -36,7 +36,6 @@ int main() {
     }
 
     // 3. Отправляем данные
-    const char *data = "12,12,45,6\r\n"; // \r\n для перевода строки на приемнике
     DWORD bytesWritten;
 
     const int N = 4000;
@@ -53,6 +52,7 @@ int main() {
             a[i] -= num % 10;
         }
     }
+
     for (int i = 0; i < N; i++) {
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
         _sleep(100);

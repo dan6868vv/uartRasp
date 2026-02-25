@@ -8,8 +8,5 @@ add_executable(DataShare main.cpp
 
 add_custom_target(project_files SOURCES
         uart_png.cpp          # твой файл для форматирования
-        background.png        # ресурсы
-        needle.png
-        needle_config.txt
-        # можно добавить и другие файлы проекта
+
 )
