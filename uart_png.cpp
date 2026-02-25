@@ -10,6 +10,8 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>  // Для чтения конфигурационного файла
 #include <map>      // Для хранения пар ключ-значение из конфига
+#define FLOAT_TO_INT(x) ((x)>=0.0f?(int)((x)+0.5f):(int)((x)-0.5f))
+
 
 std::vector<std::string> loadConfigPngFiles(const std::string &filename) {
     std::map<std::string, std::string> config;
@@ -328,7 +330,7 @@ public:
         // char buffer[64];
         // snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
         // angleText.setString(buffer);
-        angleText.setString("Угол: " + std::to_string(currentAngle));
+        angleText.setString("Angle: " + std::to_string(FLOAT_TO_INT(currentAngle)));
     }
 
     void draw() {
