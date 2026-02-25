@@ -1,3 +1,4 @@
 D:/_root/Работа/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/DataShare.dir
+D:/_root/Работа/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/project_files.dir
 D:/_root/Работа/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/edit_cache.dir
 D:/_root/Работа/AeroMash/DigitalArrowDisplay/DataShare/cmake-build-debug/CMakeFiles/rebuild_cache.dir

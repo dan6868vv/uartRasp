@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "DataShare",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -41,6 +43,13 @@
 					"id" : "DataShare::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-DataShare-Debug-ee8e181e1c8e2a7977f0.json",
 					"name" : "DataShare",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "project_files::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-project_files-Debug-bdb025beaa28f0c5d8a6.json",
+					"name" : "project_files",
 					"projectIndex" : 0
 				}
 			]
