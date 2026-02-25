@@ -103,6 +103,8 @@ public:
    	 	pivotY = 0;
    	 	windowX = 800;
    	 	windowY = 600;
+   	 	centerX = 400;
+   	 	centerY = 300;
    	 	configFile = "needle_config.txt";
     	useConfig = false;
 
@@ -229,6 +231,19 @@ void loadConfig(const std::string& filename) {
             windowY = static_cast<int>(config["window_y"]);
         }
 
+        if (config.count("center_x")) {
+            centerX = static_cast<int>(config["center_x"]);
+        }
+        else {
+        centerX = 300;
+        }
+        if (config.count("center_y")) {
+            centerY = static_cast<int>(config["center_y"]);
+        }
+        else {
+        centerY = 300;
+        }
+
     std::cout << "Установлен центр вращения: (" << pivotX << ", " << pivotY << ")" << std::endl;
     needleSprite.setOrigin(pivotX, pivotY);
 
@@ -247,7 +262,7 @@ void loadConfig(const std::string& filename) {
         backgroundSprite.setPosition(0, 0);
         needleSprite.setOrigin(pivotX, pivotY);
         // NEW: обновляем позицию стрелки для нового размера окна
-        needleSprite.setPosition(windowX / 2.0f, windowY / 2.0f);
+        needleSprite.setPosition(centerX, centerY);
 
         // NEW: обновляем позиции текста
         angleText.setPosition(windowX / 2.0f - 100, windowY - 100);
