@@ -1,12 +1,12 @@
-pivot_x = 30
-pivot_y = 650
+pivot_x = 28
+pivot_y = 230
 
-window_x = 900
-window_y = 900
+window_x = 1000
+window_y = 1000
 
-center_x = 450
-center_y = 450
+center_x = 500
+center_y = 500
 
 is_angle_text = 1
 
-needle_scale = 0.5
+needle_scale = 1
