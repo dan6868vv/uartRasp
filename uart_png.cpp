@@ -332,7 +332,10 @@ public:
 
     void update() {
         // Плавное движение стрелки
-        float angleDiff =  currentAngle - targetAngle;
+        float angleDiff = currentAngle - targetAngle;
+        if (currentAngle < targetAngle) {
+            angleDiff *= -1;
+        }
 
         // Нормализуем разницу (кратчайший путь)
         // if (angleDiff > 180) angleDiff -= 360;
