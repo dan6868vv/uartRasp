@@ -128,6 +128,10 @@ private:
     std::string configFile;
     bool useConfig;
 
+    float minAngle;
+    float maxAngle;
+    float sideNeedleMove;
+
     // Для отладки - показываем, загрузились ли текстуры
     std::string lastError;
 
@@ -266,6 +270,24 @@ public:
             centerY = static_cast<int>(config["center_y"]);
         } else {
             centerY = 300;
+        }
+
+        if (config.count("min_angle")) {
+            minAngle = (config["min_angle"]);
+        } else {
+            minAngle = 0;
+        }
+
+        if (config.count("max_angle")) {
+            maxAngle = (config["max_angle"]);
+        } else {
+            maxAngle = 360;
+        }
+
+        if (config.count("side_needle_move")) {
+            sideNeedleMove = (config["side_needle_move"]);
+        } else {
+            sideNeedleMove = 0;
         }
 
         if (config.count("is_angle_text")) {

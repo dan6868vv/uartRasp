@@ -10,3 +10,19 @@ center_y = 500
 is_angle_text = 1
 
 needle_scale = 1
+
+min_angle = 215
+max_angle = 135
+side_needle_move = 1
+
+# side needle move
+#         1
+#       4 0 2
+#         3
+#
+# 1 -> up
+# 2 -> left
+# 3 -> bottom
+# 4 -> left
+# 0 -> whole sides
+
