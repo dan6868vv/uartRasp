@@ -1,5 +1,5 @@
-pivot_x = 28
-pivot_y = 230
+pivot_x = 30
+pivot_y = 650
 
 window_x = 1000
 window_y = 1000

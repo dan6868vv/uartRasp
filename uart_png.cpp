@@ -336,7 +336,7 @@ public:
 
         // Нормализуем разницу (кратчайший путь)
         if (angleDiff > 180) angleDiff -= 360;
-        if (angleDiff < -180) angleDiff += 360;
+        //    if (angleDiff < -180) angleDiff += 360;
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
         currentAngle += angleDiff * 0.1f;
