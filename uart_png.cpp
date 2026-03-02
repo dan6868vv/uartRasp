@@ -339,15 +339,15 @@ public:
         if (angleDiff < -180) angleDiff += 360;
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
-
-        if(targetAngle>=315 && currentAngle<= 135) {
-            currentAngle -= angleDiff * 0.1f;
-        } else {
-         currentAngle += angleDiff * 0.1f;
-        }
+        currentAngle += angleDiff * 0.1f;
+        // if (targetAngle >= 315 && currentAngle <= 135 && currentAngle >= 0) {
+        //     currentAngle -= angleDiff * 0.1f;
+        // } else {
+        //     
+        // }
         // Нормализуем угол
-        if (currentAngle < 0) currentAngle += 360;
-        if (currentAngle >= 360) currentAngle -= 360;
+        // if (currentAngle < 0) currentAngle += 360;
+        // if (currentAngle >= 360) currentAngle -= 360;
 
         // Поворачиваем стрелку
         needleSprite.setRotation(currentAngle);
