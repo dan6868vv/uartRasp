@@ -54,6 +54,7 @@ int main() {
     // }
 
     for (int i = 0; i < N; i++) {
+        if (a[i] < 215 && a[i] > 135) continue;
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
         _sleep(1000);
         sendDataToComPortChar(hSerial, "\r\n", bytesWritten);
