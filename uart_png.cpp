@@ -327,7 +327,9 @@ public:
     }
 
     void setTargetAngle(float angle) {
-        targetAngle = angle;
+        if (angle > minAngle && angle < maxAngle) {
+            targetAngle = angle;
+        }
     }
 
     void update() {
