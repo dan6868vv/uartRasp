@@ -332,22 +332,22 @@ public:
 
     void update() {
         // Плавное движение стрелки
-        float angleDiff = currentAngle - targetAngle;
-        if (currentAngle < targetAngle) {
-            angleDiff *= -1;
-        }
+        float angleDiff = targetAngle - currentAngle;
+
 
         // Нормализуем разницу (кратчайший путь)
         // if (angleDiff > 180) angleDiff -= 360;
         // if (angleDiff < -180) angleDiff += 360;
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
+
+        if (targetAngle >= 215 && currentAngle <= 135) {
+            angleDiff -= 360;
+        }
+        if (currentAngle >= 215 && targetAngle <= 135) {
+            angleDiff += 360;
+        }
         currentAngle += angleDiff * 0.1f;
-        // if (targetAngle >= 315 && currentAngle <= 135 && currentAngle >= 0) {
-        //     currentAngle -= angleDiff * 0.1f;
-        // } else {
-        //
-        // }
         // Нормализуем угол
         if (currentAngle < 0) currentAngle += 360;
         if (currentAngle >= 360) currentAngle -= 360;
