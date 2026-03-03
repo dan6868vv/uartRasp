@@ -343,7 +343,7 @@ public:
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
 
-        if (targetAngle >= minAngle && currentAngle <= maxAngle) {
+        if (targetAngle >= minAngle && currentAngle <= maxAngle && currentAngle <= minAngle) {
             angleDiff -= 360;
         }
         if (currentAngle >= minAngle && targetAngle <= maxAngle) {
@@ -357,10 +357,6 @@ public:
         // Поворачиваем стрелку
         needleSprite.setRotation(currentAngle);
 
-        // Обновляем текстовую информацию
-        // char buffer[64];
-        // snprintf(buffer, sizeof(buffer), "Angle: %.1f°", currentAngle);
-        // angleText.setString(buffer);
         angleText.setString("Angle: " + std::to_string(FLOAT_TO_INT(currentAngle)));
     }
 
