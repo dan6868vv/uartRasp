@@ -337,8 +337,7 @@ public:
     void update() {
         // Плавное движение стрелки
         float angleDiff = targetAngle - currentAngle;
-
-
+        
         // Нормализуем разницу (кратчайший путь)
         // if (angleDiff > 180) angleDiff -= 360;
         // if (angleDiff < -180) angleDiff += 360;
@@ -365,7 +364,7 @@ public:
         if (currentAngle >= 360) currentAngle -= 360;
 
         // Поворачиваем стрелку
-        needleSprite.setRotation(currentAngle);
+        needleSprite.setRotation(currentAngle + minAngle);
 
         angleText.setString("Angle: " + std::to_string(FLOAT_TO_INT(currentAngle)));
     }
