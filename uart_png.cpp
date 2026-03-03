@@ -341,10 +341,10 @@ public:
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
 
-        if (targetAngle >= 215 && currentAngle <= 135) {
+        if (targetAngle >= minAngle && currentAngle <= maxAngle) {
             angleDiff -= 360;
         }
-        if (currentAngle >= 215 && targetAngle <= 135) {
+        if (currentAngle >= minAngle && targetAngle <= maxAngle) {
             angleDiff += 360;
         }
         currentAngle += angleDiff * 0.1f;
