@@ -327,7 +327,9 @@ public:
     }
 
     void setTargetAngle(float angle) {
-        if (angle > minAngle || angle < maxAngle) {
+        if ((angle > minAngle || angle < maxAngle) && sideNeedleMove == 1) {
+            targetAngle = angle;
+        } else if ((angle < minAngle || angle > maxAngle) && sideNeedleMove == 3) {
             targetAngle = angle;
         }
     }
@@ -342,12 +344,20 @@ public:
         // if (angleDiff < -180) angleDiff += 360;
 
         // Плавное движение (коэффициент 0.1 для сглаживания)
-
-        if (targetAngle >= minAngle && currentAngle <= maxAngle && currentAngle <= minAngle) {
-            angleDiff -= 360;
-        }
-        if (currentAngle >= minAngle && targetAngle <= maxAngle) {
-            angleDiff += 360;
+        if (sideNeedleMove == 1) {
+            if (targetAngle >= minAngle && currentAngle <= maxAngle) {
+                angleDiff -= 360;
+            }
+            if (currentAngle >= minAngle && targetAngle <= maxAngle) {
+                angleDiff += 360;
+            }
+        } else if (sideNeedleMove == 3) {
+            if (targetAngle >= maxAngle && currentAngle <= minAngle) {
+                angleDiff -= 360;
+            }
+            if (currentAngle >= maxAngle && targetAngle <= minAngle) {
+                angleDiff += 360;
+            }
         }
         currentAngle += angleDiff * 0.1f;
         // Нормализуем угол

@@ -55,6 +55,8 @@ int main() {
     for (int i = 0; i < N; i++) {
         //  if (a[i] < 200 && a[i] > 160) continue;
         sendDataToComPortInt(hSerial, a[i], bytesWritten);
+        std::cout << i;
+        std::cout << " ";
         _sleep(500);
         sendDataToComPortChar(hSerial, "\r\n", bytesWritten);
     }
